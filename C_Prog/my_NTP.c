@@ -24,7 +24,7 @@ my_NTP();
 void my_NTP(){
 
 int sockfd,n;
-
+struct tm *info;
 typedef struct
   {
 
@@ -94,6 +94,10 @@ typedef struct
   packet.txTm_f = ntohl( packet.txTm_f ); // Time-stamp fraction of a second.
   printf("Secsinc1900:%lu\r\n",packet.txTm_s);
   
+  time_t txTm = ( time_t ) ( packet.txTm_s - NTP_TIMESTAMP_DELTA );
+  info = gmtime(&txTm);
+  printf("UTC Time: %02d/%02d/%04d,%02d:%02d:%02d\r\n",info->tm_mday,info->tm_mon,(info->tm_year + 1900),info->tm_hour,info->tm_min,info->tm_sec);
+
   unsigned long epoch= ( packet.txTm_s - NTP_TIMESTAMP_DELTA );
   printf("epoch %lu\r\n",epoch);
 
