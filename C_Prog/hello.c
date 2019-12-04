@@ -1,7 +1,8 @@
 #include<stdio.h>
-main()
+main() 
 {
 print("Hello!");
 print("Welcome to our C");
 print("hiiiii");
+print("hi");
 }
